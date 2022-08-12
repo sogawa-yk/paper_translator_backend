@@ -1,15 +1,27 @@
 from fastapi import FastAPI
 from src.deepl_request import translate
+from starlette.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,   # 追記により追加
+    allow_methods=["*"],      # 追記により追加
+    allow_headers=["*"]       # 追記により追加
+)
+
+class SendText(BaseModel):
+    text: str
 
 @app.get("/")
 def read_root():
     return {"Hello": "World"}
 
-@app.get('/translate/')
-def translate_text(text: str=''):
+@app.post('/translate/')
+def translate_text(request: SendText):
     """投げたテキストを翻訳して返す。
 
     Args:
@@ -18,7 +30,9 @@ def translate_text(text: str=''):
     Returns:
         _type_: 結果が入った辞書
     """
-    if '\n' in text:
-        text = text.replace('\n', '')
-    result = translate(text)
+    if '\n' in request.text:
+        text = request.text.replace('\n', '')
+    result = translate(request.text)
+    # result = result.replace('。', '.')
+    # result = result.replace('、', ',')
     return {'text': result}
