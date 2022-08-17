@@ -5,8 +5,8 @@ WORKDIR /app
 # コンテナ内で必要なパッケージをインストール
 RUN apt install -y git
 RUN cd /app
-RUN git clone -b feature/add-deepl-api https://github.com/sogawa-yk/paper_translator_backend.git
-RUN pip install --no-cache-dir --trusted-host pypi.python.org -r /app/requirements.txt
+RUN git clone -b develop/1.0 https://github.com/sogawa-yk/paper_translator_backend.git
+RUN pip install --no-cache-dir --trusted-host pypi.python.org -r /app/paper_translator_backend/requirements.txt
 
 
 EXPOSE 8000
