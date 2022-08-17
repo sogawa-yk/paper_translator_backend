@@ -3,3 +3,4 @@ fastapi
 PyYAML
 requests
 httpx
+pymupdf
