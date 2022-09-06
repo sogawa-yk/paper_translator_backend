@@ -15,7 +15,6 @@ app.add_middleware(
 
 class SendText(BaseModel):
     text: str
-    uri: str
 
 @app.get("/")
 def read_root():
@@ -27,14 +26,16 @@ def translate_text(request: SendText):
 
     Args:
         text (str, optional): 英語の文章. Defaults to ''.
-        uri (str, optional): PDFのURL
 
     Returns:
         _type_: 結果が入った辞書
     """
+    print('###REQUEST###')
+    print(request.text)
     if '\n' in request.text:
         request.text = request.text.replace('\n', '')
-    result = translate(request.text, request.uri)
+    result = translate(request.text)
+
     # result = result.replace('。', '.')
     # result = result.replace('、', ',')
     return {'text': result}

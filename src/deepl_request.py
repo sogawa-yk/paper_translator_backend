@@ -4,11 +4,10 @@ from requests.exceptions import Timeout
 from src.pdf import insert_space
 
 
-def translate(text, uri):
+def translate(text):
     with open('/app/paper_translator_backend/data/config.yaml') as file:
         key = yaml.safe_load(file.read())['api_key']
 
-    text = insert_space(text, uri)
     params = {
         'auth_key': key,
         'text': text,

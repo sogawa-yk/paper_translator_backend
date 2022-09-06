@@ -4,9 +4,6 @@ import re
 import glob
 import time
 
-text = 'Thepromiseofdeeplearningistodiscoverrich,hierarchicalmodels[2]thatrepresentprobabilitydistributionsoverthekindsofdataencounteredinarti2cialintelligenceapplications,suchasnaturalimages,audiowaveformscontainingspeech,andsymbolsinnaturallanguagecorpora.'#'ThereisnoneedforanyMarkovchainsorunrolledapproximateinferencenet-worksduringeithertrainingorgenerationofsamples.Experimentsdemonstratethepotentialoftheframeworkthroughqualitativeandquantitativeevaluationofthegeneratedsamples.'
-uri = 'https://arxiv.org/pdf/1406.2661.pdf'
-
 def insert_space(obj_text, uri):
     text_list = []
     save_name = '/app/paper_translator_backend/tmp/'+str(uri.split('/')[-1])
@@ -42,6 +39,8 @@ def insert_space(obj_text, uri):
         if start_idx < point <= end_idx:
             res.append(text_list[idx])
 
-    return ' '.join(res)
+    print('###CONVERTED###')
+    print(' '.join(res))
+    print('--------------')
 
-print(insert_space(text, uri))
+    return ' '.join(res)
